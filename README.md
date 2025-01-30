@@ -14,10 +14,12 @@ To start an Overleaf project based on this template, just make a copy of the pro
 
 The templates are defined inside the Main.tex file.
 
-At the header of the template file, you will find the configuration variables: \thesis and \proposal. 
-You need to select the appropriate variable for your submission:
-* Thesis: \thesistrue  and    \proposalfalse
-* Research Proposal: \thesisfalse  and    \proposaltrue
+At the header of the template file, you will find the configuration variable: "doctype". 
+You need to select the appropriate "doctype" for your submission:
+* MSc Research Proposal: "msc-proposal"
+* PhD Research Proposal: "phd-proposal"
+* MSc Thesis: "msc-thesis"
+* PhD Thesis: "phd-thesis"
 
 ## Auxiliary Pages
 
