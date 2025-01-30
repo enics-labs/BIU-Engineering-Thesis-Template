@@ -5,17 +5,15 @@
 %    PhD Thesis:   https://graduate-school.biu.ac.il/node/1793
 
 
-% For Thesis template specific configurations
-%    Comment out the appropriate one
-\newif\ifthesis
-    \thesisfalse
-    % \thesistrue
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%            CONFIGURATION            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Choose the correct template from the options below
+% \newcommand{\doctype}{msc-proposal}
+% \newcommand{\doctype}{phd-proposal}
+% \newcommand{\doctype}{msc-thesis}
+\newcommand{\doctype}{phd-thesis}
 
-% For Research Proposal template specific configurations
-%    Comment out the appropriate one
-\newif\ifproposal
-    % \proposalfalse
-    \proposaltrue
 
 
 \usepackage{packages/basic_packages} 
@@ -50,6 +48,7 @@
 \begin{document}
 \frontmatter
 \pagestyle{empty}
+
 %-----Front Page in English--------%
 %----------------------------------%
 % Create your front page with the .docx files 
@@ -58,56 +57,67 @@
 %          1. TWO EQUIVALENT title pages (one for hardcover, one for inner cover)
 %          2. Supervisor name page
 \clearpage
-\ifthesis
-    \includepdf[fitpaper,pages=-,pagecommand={}]
-            % {AuxiliaryPages/front_page_english_msc_thesis_example}
-            {AuxiliaryPages/front_page_english_phd_thesis_example}
-\fi
 
-\ifproposal
-    \includepdf[fitpaper,pages=-,pagecommand={}]
-            % {AuxiliaryPages/front_page_hebrew_msc_proposal_example}
-            {AuxiliaryPages/front_page_hebrew_phd_proposal_example}
-\fi
+    \ifthenelse{\equal{\doctype}{msc-proposal}}{
+       \includepdf[fitpaper,pages=-,pagecommand={}]{AuxiliaryPages/front_page_hebrew_msc_proposal_example}
+    }
+    
+    \ifthenelse{\equal{\doctype}{phd-proposal}}{
+       \includepdf[fitpaper,pages=-,pagecommand={}]{AuxiliaryPages/front_page_hebrew_phd_proposal_example}
+    }
+    
+    \ifthenelse{\equal{\doctype}{msc-thesis}}{
+       \includepdf[fitpaper,pages=-,pagecommand={}]{AuxiliaryPages/front_page_english_msc_thesis_example}
+    }
+    
+    \ifthenelse{\equal{\doctype}{phd-thesis}}{
+       \includepdf[fitpaper,pages=-,pagecommand={}]{AuxiliaryPages/front_page_english_phd_thesis_example}
+    }
+
+
+
 
 %----------Acknowledgments---------%
 %----------------------------------%
-\ifthesis
+\ifthenelse{\equal{\doctype}{msc-thesis} \or \equal{\doctype}{phd-thesis}}{
     \chapter*{Acknowledgments}
         \thispagestyle{empty} % Removes page numbering according to guidelines
          \color{teal}
            This is where you should thank your thesis advisor, your fellow students, who worked on the projects with you and were a big part of your studies, your family, and whoever else you want. You should also point out any funding agencies that contributed through scholarships or grants that funded the work.
         \color{black}    
-\fi
-    
-
+}
+   
 %-----Table of Contents------------%
 %----------------------------------%
     \renewcommand{\contentsname}{Table of Contents}
     \tableofcontents
     \thispagestyle{empty} % Removes page numbering according to guidelines
-\clearpage
+    \clearpage
 
-
-\ifthesis
-    %-----List of Figures--------------%
-    %----------------------------------%
+%-----List of Figures--------------%
+%----------------------------------%
+    \ifthenelse{\equal{\doctype}{msc-thesis} \or \equal{\doctype}{phd-thesis}}{
         \listoffigures
         \thispagestyle{empty} % Removes page numbering according to guidelines
-    \clearpage
+        \clearpage
+    }
 
-    %-----List of Tables--------------%
-    %----------------------------------%
+%-----List of Tables--------------%
+%----------------------------------%
+    \ifthenelse{\equal{\doctype}{msc-thesis} \or \equal{\doctype}{phd-thesis}}{
         \listoftables
         \thispagestyle{empty} % Removes page numbering according to guidelines
-    \clearpage
+        \clearpage
+    }
 
-    %-----List of Acronyms-------------%
-    %----------------------------------%
+%-----List of Acronyms-------------%
+%----------------------------------%
+    \ifthenelse{\equal{\doctype}{msc-thesis} \or \equal{\doctype}{phd-thesis}}{
         \printglossary[type=\acronymtype]
         \thispagestyle{empty} % Removes page numbering according to guidelines
-     \clearpage
-\fi 
+        \clearpage
+    }
+
 
 %----------Define Headers-------------%
 %-------------------------------------%
@@ -143,10 +153,12 @@
     \color{black}
 
 
-\ifproposal
-    \includepdf[fitpaper,pages=-,pagecommand={\thispagestyle{plain}}]{AuxiliaryPages/abstract_hebrew_example}
-    \clearpage
-\fi
+    % For PhD Proposal, Hebrew abstract should appear at the beginning
+    \ifthenelse{\equal{\doctype}{phd-proposal}}{
+        \includepdf[fitpaper,pages=-,pagecommand={\thispagestyle{plain}}]{AuxiliaryPages/abstract_hebrew_example}
+        \clearpage
+    }
+
 
 
 \mainmatter
@@ -201,35 +213,34 @@
 \color{black}
 
 
-\ifthesis
 %----------THESIS CONTENT-------------%
 %-------------------------------------%
-\chapter{Thesis Content}
-\color{teal}
-        From this chapter and on, you should present the content of your thesis. You will probably have several chapters of content -- for example, a chapter for each contribution/published paper.
+\ifthenelse{\equal{\doctype}{msc-thesis} \or \equal{\doctype}{phd-thesis}}{
+    \chapter{Thesis Content}
+    \color{teal}
+            From this chapter and on, you should present the content of your thesis. You will probably have several chapters of content -- for example, a chapter for each contribution/published paper.
+    
+    \color{cyan}
+        Note that it is often nice to include each chapter as a separate .tex file, using the \texttt{\textbackslash include\{filename\}} option.
+        You can reduce the compile time of your paper by adding \texttt{\textbackslash includeonly\{filename\}} in the options. 
+        This will only output the content of the selected file, but will retain the full file's numbering and everything.
+    \color{black}
+    
+    \chapter{Thesis Content -- \textit{e.g., another contribution}}
+    \color{teal}
+        This could be a chapter about another contribution of your thesis.
+    \color{black}
+    
+    \chapter{Thesis Content -- \textit{e.g., results}}
+    \color{teal}
+        This could be a chapter about the results.
+    \color{black}
+}
 
-\color{cyan}
-    Note that it is often nice to include each chapter as a separate .tex file, using the \texttt{\textbackslash include\{filename\}} option.
-    You can reduce the compile time of your paper by adding \texttt{\textbackslash includeonly\{filename\}} in the options. 
-    This will only output the content of the selected file, but will retain the full file's numbering and everything.
-\color{black}
 
-\chapter{Thesis Content -- \textit{e.g., another contribution}}
-\color{teal}
-    This could be a chapter about another contribution of your thesis.
-\color{black}
-
-\chapter{Thesis Content -- \textit{e.g., results}}
-\color{teal}
-    This could be a chapter about the results.
-\color{black}
-
-\fi 
-
-
-\ifproposal
 %-------RESEARCH OBJECTIVES-----------%
 %-------------------------------------%
+\ifthenelse{\equal{\doctype}{msc-proposal} \or \equal{\doctype}{phd-proposal}}{
     \chapter{Research Objective and Methodology}
     \section{Objectives}
         \label{sec_objectives}
@@ -244,7 +255,7 @@
             \blue{It is good advice to use a flowchart to help describe the methodology.}
         \color{black}
     \clearpage
-\fi
+}
 
 \color{cyan}
     This is how to add a table. You can also create your table in Word/Excel and include the pdf instead of dealing with \LaTeX tables. Make sure to reference all you tables in the text (e.g., \tblref{tbl:ACE_results_SER}).
@@ -301,20 +312,20 @@
 
 
 
-\ifproposal
-    %-------PRELIMINARY RESULTS-----------%
-    %-------------------------------------%
+%-------PRELIMINARY RESULTS-----------%
+%-------------------------------------%
+\ifthenelse{\equal{\doctype}{msc-proposal} \or \equal{\doctype}{phd-proposal}}{
     \chapter{Preliminary Results}
     \color{teal}
         Optionally, include some preliminary results here.
     \color{black}
     \clearpage
-\fi
+}
 
 
-\ifthesis
-    %----------SUMMARY--------------------%
-    %-------------------------------------%
+%----------SUMMARY--------------------%
+%-------------------------------------%
+\ifthenelse{\equal{\doctype}{msc-thesis} \or \equal{\doctype}{phd-thesis}}{
     \chapter{Summary and Conclusions}
     \label{sec_conclusions}
     \color{teal}
@@ -323,7 +334,7 @@
         \section{Future Work}
             Here you should discuss future steps to build on top of your work.
     \color{black}
-\fi
+}
 
 %----------BIBLIOGRAPHY---------------%
 %-------------------------------------%
@@ -332,19 +343,20 @@
 \bibliographystyle{IEEEtran}
 \bibliography{bibliography/this_bibliography}
 
-\ifthesis
 %----------   Appendix  --------------%
 %-------------------------------------%
-\chapter*{Appendix A:\\First Appendix}
-\addcontentsline{toc}{chapter}{Appendix A: First Appendix}
-\color{teal}
-    OPTIONAL: If you require an appendix (e.g., for attaching a paper or attaching a piece of code) you can add it here.
-\color{black}
-\fi
+\ifthenelse{\equal{\doctype}{msc-thesis} \or \equal{\doctype}{phd-thesis}}{
+    \chapter*{Appendix A:\\First Appendix}
+    \addcontentsline{toc}{chapter}{Appendix A: First Appendix}
+    \color{teal}
+        OPTIONAL: If you require an appendix (e.g., for attaching a paper or attaching a piece of code) you can add it here.
+    \color{black}
+}
 
-\ifthesis
-    %------HEBREW ABSTRACT---------%
-    %------------------------------%
+
+%------HEBREW ABSTRACT---------%
+%------------------------------%
+\ifthenelse{\equal{\doctype}{msc-thesis} \or \equal{\doctype}{phd-thesis}}{
     % Create your Hebrew abstract with the .docx files 
     %    under AuxiliaryPages and save as pdf. 
     \backmatter
@@ -352,16 +364,21 @@
     \includepdf[fitpaper,pages=-,pagecommand={}]
                 {AuxiliaryPages/abstract_hebrew_example}
     \clearpage
-    
-    %------HEBREW FRONT PAGE-------%
-    %------------------------------%
+}
+
+%------HEBREW FRONT PAGE-------%
+%------------------------------%
     % Create your Hebrew front page with the .docx files 
     %    under AuxiliaryPages and save as pdf. 
     % I have provided templates for both PhD and MSc theses.
-        \includepdf[fitpaper,pages=-,pagecommand={}]
-                % {AuxiliaryPages/front_page_hebrew_msc_thesis_example}
-                {AuxiliaryPages/front_page_hebrew_phd_thesis_example}
+    \ifthenelse{\equal{\doctype}{msc-thesis}}{
+        \includepdf[fitpaper,pages=-,pagecommand={}] {AuxiliaryPages/front_page_hebrew_msc_thesis_example}
+    }
+    
+    \ifthenelse{\equal{\doctype}{phd-thesis}}{
+        \includepdf[fitpaper,pages=-,pagecommand={}] {AuxiliaryPages/front_page_hebrew_phd_thesis_example}
+    }
     \clearpage
-\fi
+
 
 \end{document}
