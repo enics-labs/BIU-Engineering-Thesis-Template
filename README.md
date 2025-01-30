@@ -37,4 +37,13 @@ The following template files are included within the noted folders:
 * **bibliography/this_bibliography.bib**: A file for adding your BibTeX entries to.
 * **AuxiliaryPages**: As noted before, these are .docx templates for the front and back matter of the thesis.
 
+## MS Word Users:
+If you prefer to use MS Word instead of LaTeX, you can find the following templates under the **"MSWord Templates"** folder:
+* **MSc_Proposal.docx**: Template for MSc Research Proposal
+* **PhD_Proposal.docx**: Template for PhD Research Proposal
+* **MSc_Thesis.docx**: Template for MSc Thesis
+* **PhD_Thesis.docx**: Template for PhD Thesis
+* **MSc_Project.docx**: Template for Final Project in the Non-Thesis Track
+
+
 

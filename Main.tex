@@ -8,14 +8,14 @@
 % For Thesis template specific configurations
 %    Comment out the appropriate one
 \newif\ifthesis
-    % \thesisfalse
-    \thesistrue
+    \thesisfalse
+    % \thesistrue
 
 % For Research Proposal template specific configurations
 %    Comment out the appropriate one
 \newif\ifproposal
-    \proposalfalse
-    % \proposaltrue
+    % \proposalfalse
+    \proposaltrue
 
 
 \usepackage{packages/basic_packages} 
@@ -66,7 +66,7 @@
 
 \ifproposal
     \includepdf[fitpaper,pages=-,pagecommand={}]
-            %{AuxiliaryPages/front_page_hebrew_msc_proposal_example}
+            % {AuxiliaryPages/front_page_hebrew_msc_proposal_example}
             {AuxiliaryPages/front_page_hebrew_phd_proposal_example}
 \fi
 
@@ -144,7 +144,7 @@
 
 
 \ifproposal
-    \includepdf[fitpaper,pages=-,pagecommand={\thispagestyle{plain}}]{Templates/AuxiliaryPages/abstract_hebrew_example}
+    \includepdf[fitpaper,pages=-,pagecommand={\thispagestyle{plain}}]{AuxiliaryPages/abstract_hebrew_example}
     \clearpage
 \fi
 
