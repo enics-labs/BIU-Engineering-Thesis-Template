@@ -9,10 +9,10 @@
 %            CONFIGURATION            %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Choose the correct template from the options below
-% \newcommand{\doctype}{msc-proposal}
+ \newcommand{\doctype}{msc-proposal}
 % \newcommand{\doctype}{phd-proposal}
 % \newcommand{\doctype}{msc-thesis}
-\newcommand{\doctype}{phd-thesis}
+%\newcommand{\doctype}{phd-thesis}
 
 
 
@@ -241,17 +241,23 @@
 %-------RESEARCH OBJECTIVES-----------%
 %-------------------------------------%
 \ifthenelse{\equal{\doctype}{msc-proposal} \or \equal{\doctype}{phd-proposal}}{
-    \chapter{Research Objective and Methodology}
-    \section{Objectives}
+    \chapter{Proposed Research}
+    \section{Research Objectives}
         \label{sec_objectives}
         \color{teal}
             The main research objective of this work is to ...
         \color{black}
+
+    \section{Proposed Research}
+        \label{sec_proposed_research}
+        \color{teal}
+            This research constitutes the following ...
+        \color{black}
         
-    \section{Methodology}
+    \section{Research Methodology}
         \label{sec_methodology}
         \color{teal}
-            The methodology for carrying out this research is ...
+            The methodology for carrying out the research describe above is ...
             \blue{It is good advice to use a flowchart to help describe the methodology.}
         \color{black}
     \clearpage
